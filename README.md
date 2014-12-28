@@ -8,7 +8,7 @@ KCV.ViewRangeCalc.dll放入KanColleViewer的Plugin目录中
 
 截图
 ----
-![image1](https://raw.github.com/Gizeta/KCV.ViewRangeCalc/master/ScreenShots/screenshot1.jpg)
+![image1](https://raw.github.com/Gizeta/KCV.ViewRangeCalc/master/ScreenShots/screenshot1.png)
 
 使用库
 -----
