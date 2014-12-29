@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalcExtension.cs" />
+    <Compile Include="FleetToViewRangeConverter.cs" />
     <Compile Include="KCVUIHelper.cs" />
     <Compile Include="PluginLoader.cs" />
     <Compile Include="PluginSettings.cs" />

@@ -6,7 +6,7 @@ namespace Gizeta.KCV.ViewRangeCalc
     [Export(typeof(IToolPlugin))]
     [ExportMetadata("Title", "KCV.ViewRangeCalc")]
     [ExportMetadata("Description", "KanColleViewer索敌值计算插件。")]
-    [ExportMetadata("Version", "1.0.0")]
+    [ExportMetadata("Version", "1.1.0")]
     [ExportMetadata("Author", "@Gizeta")]
     public class PluginLoader : IToolPlugin
     {

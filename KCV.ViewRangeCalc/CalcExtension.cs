@@ -1,5 +1,7 @@
 ﻿using Grabacr07.KanColleViewer.ViewModels;
 using Grabacr07.KanColleViewer.ViewModels.Contents;
+using Grabacr07.KanColleViewer.ViewModels.Contents.Fleets;
+using Grabacr07.KanColleViewer.Views;
 using Grabacr07.KanColleViewer.Views.Settings;
 using Grabacr07.KanColleWrapper;
 using System;
@@ -7,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using KCVApp = Grabacr07.KanColleViewer.App;
 
@@ -19,6 +22,7 @@ namespace Gizeta.KCV.ViewRangeCalc
         private ContentPresenter contentView;
         private ScrollViewer startSettingsView;
         private ContentControl mainSettingsView;
+        private ContentPresenter statusBarView;
 
         private CalcExtension()
         {
@@ -46,16 +50,16 @@ namespace Gizeta.KCV.ViewRangeCalc
             if(e.PropertyName=="IsStarted")
             {
                 var proxy = KanColleClient.Current.Proxy;
-                proxy.api_port.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcTotalViewRange());
-                proxy.api_get_member_ship.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcTotalViewRange());
-                proxy.api_get_member_ship2.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcTotalViewRange());
-                proxy.api_get_member_ship3.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcTotalViewRange());
-                proxy.api_get_member_deck.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcTotalViewRange());
-                proxy.api_get_member_deck_port.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcTotalViewRange());
-                proxy.api_req_hensei_change.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcTotalViewRange());
-                proxy.api_req_hokyu_charge.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcTotalViewRange());
+                proxy.api_port.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcAllTotalViewRange());
+                proxy.api_get_member_ship.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcAllTotalViewRange());
+                proxy.api_get_member_ship2.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcAllTotalViewRange());
+                proxy.api_get_member_ship3.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcAllTotalViewRange());
+                proxy.api_get_member_deck.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcAllTotalViewRange());
+                proxy.api_get_member_deck_port.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcAllTotalViewRange());
+                proxy.api_req_hensei_change.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcAllTotalViewRange());
+                proxy.api_req_hokyu_charge.Subscribe(x => ViewRangeSelectorViewModel.Instance.CalcAllTotalViewRange());
 
-                ViewRangeSelectorViewModel.Instance.CalcTotalViewRange();
+                ViewRangeSelectorViewModel.Instance.CalcAllTotalViewRange();
             }
         }
 
@@ -67,6 +71,34 @@ namespace Gizeta.KCV.ViewRangeCalc
 
             KCVUIHelper.KCVContent.FindVisualChildren<RadioButton>().Where(x => x.Name == "SettingsTab").First().Checked += StartSettingsTab_Checked;
             KCVUIHelper.KCVContent.FindVisualChildren<ContentPresenter>().Where(x => x.DataContext is StartContentViewModel || x.DataContext is MainContentViewModel).First().DataContextChanged += ContentView_DataContextChanged;
+
+            KCVUIHelper.KCVWindow.FindVisualChildren<StatusBar>().First().FindVisualChildren<ContentPresenter>().Last().DataContextChanged += StatusBar_DataContextChanged;
+        }
+
+        private void StatusBar_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var bar = sender as ContentPresenter;
+            if (bar.Content is FleetsViewModel)
+            {
+                statusBarView = bar;
+                bar.LayoutUpdated += StatusBar_LayoutUpdated;
+            }
+        }
+
+        private void StatusBar_LayoutUpdated(object sender, EventArgs e)
+        {
+            statusBarView.LayoutUpdated -= StatusBar_LayoutUpdated;
+
+            var textBlock = statusBarView.FindVisualChildren<TextBlock>()
+                .Where(x => x.GetBindingExpression(TextBlock.TextProperty) == null ? false : x.GetBindingExpression(TextBlock.TextProperty).ParentBinding.Path.Path == "TotalViewRange")
+                .First();
+            
+            var losBinding = new Binding();
+            losBinding.Path = new PropertyPath("TotalViewRange");
+            losBinding.Converter = new FleetToViewRangeConverter();
+            textBlock.SetBinding(TextBlock.TextProperty, losBinding);
+
+            statusBarView = null;
         }
 
         private void ContentView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
