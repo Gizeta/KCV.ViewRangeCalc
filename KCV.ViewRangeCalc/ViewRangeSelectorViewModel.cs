@@ -32,7 +32,7 @@ namespace Gizeta.KCV.ViewRangeCalc
                     this.RaisePropertyChanged();
 
                     if (!value)
-                        this.CalcTotalViewRange();
+                        this.CalcAllTotalViewRange();
                 }
             }
         }
@@ -50,7 +50,7 @@ namespace Gizeta.KCV.ViewRangeCalc
                     this.RaisePropertyChanged();
 
                     if (!value)
-                        this.CalcTotalViewRange();
+                        this.CalcAllTotalViewRange();
                 }
             }
         }
@@ -68,7 +68,7 @@ namespace Gizeta.KCV.ViewRangeCalc
                     this.RaisePropertyChanged();
 
                     if (!value)
-                        this.CalcTotalViewRange();
+                        this.CalcAllTotalViewRange();
                 }
             }
         }
@@ -86,20 +86,21 @@ namespace Gizeta.KCV.ViewRangeCalc
                     this.RaisePropertyChanged();
 
                     if (!value)
-                        this.CalcTotalViewRange();
+                        this.CalcAllTotalViewRange();
                 }
             }
         }
 
-        public void CalcTotalViewRange()
+        public void CalcAllTotalViewRange()
         {
             foreach (var fleet in KanColleClient.Current.Homeport.Organization.Fleets)
             {
-                fleet.Value.SetTotalViewRange(calc(fleet.Value));
+                var los = this.CalcTotalViewRange(fleet.Value);
+                fleet.Value.SetTotalViewRange((int)los);
             }
         }
 
-        private int calc(Fleet fleet)
+        public double CalcTotalViewRange(Fleet fleet)
         {
             if (fleet == null || fleet.Ships.Length == 0) return 0;
 
@@ -213,7 +214,7 @@ namespace Gizeta.KCV.ViewRangeCalc
                     return Math.Sqrt(f.ViewRange - spotter - radar);
                 }) * 1.69 - Math.Ceiling(KanColleClient.Current.Homeport.Admiral.Level / 5.0) * 5.0 * 0.61;
 
-                return (int)result;
+                return result;
             }
 
             if (ViewRangeType4)
@@ -303,7 +304,7 @@ namespace Gizeta.KCV.ViewRangeCalc
                     return Math.Sqrt(f.ViewRange - spotter - radar);
                 }) - KanColleClient.Current.Homeport.Admiral.Level * 0.4;
 
-                return (int)result;
+                return result;
             }
 
             return 0;
