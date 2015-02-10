@@ -10,6 +10,10 @@ KCV.ViewRangeCalc.dll放入KanColleViewer的Plugin目录中
 ----
 ![image1](https://raw.github.com/Gizeta/KCV.ViewRangeCalc/master/ScreenShots/screenshot1.jpg)
 
+注意
+----
+本插件会修改KanColleViewer界面控件，可能会与某些依赖界面控件的插件不兼容。如果发生不兼容问题，请联系开发者。
+
 使用库
 -----
 * [KanColleViewer](http://grabacr.net/kancolleviewer) - 提督業も忙しい！
