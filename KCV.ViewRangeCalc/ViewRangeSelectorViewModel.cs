@@ -264,7 +264,7 @@ namespace Gizeta.KCV.ViewRangeCalc
                         .Where(a => a.Slot > 0)
                         .Select(a => a.Item.GetRawData().api_saku)
                  ).Sum();
-                result += sb * 1.0;
+                result += sb * 1.1;
 
                 var xdt = fleet.Ships.SelectMany(
                     x => x.SlotItems
