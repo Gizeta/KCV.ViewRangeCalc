@@ -43,7 +43,7 @@
             <TextBlock Style="{DynamicResource DefaultTextStyleKey}" LineHeight="18">
                 <Run Text="新秋式簡易" Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}, Path=Foreground}" />
                 <LineBreak />
-                <Run Text="舰爆×0.6 + 舰攻×0.8 + 舰侦×1.0 + 水侦×1.2 + 水爆×1.0" />
+                <Run Text="舰爆×0.6 + 舰攻×0.8 + 舰侦×1.0 + 水侦×1.2 + 水爆×1.1" />
                 <LineBreak />
                 <Run Text=" + 电探×0.6 + 探照灯×0.5" />
                 <LineBreak />
