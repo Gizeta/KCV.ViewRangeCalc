@@ -2,6 +2,8 @@ KCV.ViewRangeCalc
 ====================
 KanColleViewer索敌值计算插件
 
+注：KanColleViewer已增加“2-5式(秋)”索敌计算。本插件仍会保持更新，如有新索敌公式欢迎提交issue。
+
 使用方法
 -------
 KCV.ViewRangeCalc.dll放入KanColleViewer的Plugin目录中
