@@ -4,7 +4,7 @@ KanColleViewer索敌值计算插件
 
 注：KanColleViewer已增加“2-5式(秋)”索敌计算。本插件仍会保持更新，如有新索敌公式欢迎提交issue。
 
-**目前master分支不兼容KanColleViewer 3.6及更高版本。**
+**_master_ 分支不兼容KanColleViewer 3.6.0及更高版本，仅为低版本KCV提供扩展功能。如需继续使用本插件，请自行编译 _compat-v3.6_ 分支。**
 
 使用方法
 -------
