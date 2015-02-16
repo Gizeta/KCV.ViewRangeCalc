@@ -74,22 +74,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalcExtension.cs" />
-    <Compile Include="FleetToViewRangeConverter.cs" />
     <Compile Include="KCVUIHelper.cs" />
     <Compile Include="PluginLoader.cs" />
-    <Compile Include="PluginSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KanColleWrapperHelper.cs" />
-    <Compile Include="ViewRangeSelector.xaml.cs">
-      <DependentUpon>ViewRangeSelector.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewRangeSelectorViewModel.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="ViewRangeSelector.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="ViewRangeType4.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

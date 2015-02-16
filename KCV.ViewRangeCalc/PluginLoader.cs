@@ -1,5 +1,6 @@
 ﻿using Grabacr07.KanColleViewer.Composition;
 using System.ComponentModel.Composition;
+using System.Linq;
 
 namespace Gizeta.KCV.ViewRangeCalc
 {
@@ -18,7 +19,6 @@ namespace Gizeta.KCV.ViewRangeCalc
             {
                 hasInitialized = true;
 
-                PluginSettings.Load();
                 CalcExtension.Instance.Initialize();
             }
         }
@@ -35,7 +35,7 @@ namespace Gizeta.KCV.ViewRangeCalc
 
         public object GetToolView()
         {
-            return new ViewRangeSelector { DataContext = ViewRangeSelectorViewModel.Instance };
+            return null;
         }
     }
 }
