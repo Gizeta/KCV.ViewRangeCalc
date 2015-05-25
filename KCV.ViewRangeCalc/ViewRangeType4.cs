@@ -27,14 +27,14 @@ namespace Gizeta.KCV.ViewRangeCalc
             }
         }
 
-        public override double Calc(Fleet fleet)
+        public override double Calc(Ship[] ships)
         {
-            if (fleet == null || fleet.Ships.Length == 0) return 0;
+            if (ships == null || ships.Length == 0) return 0;
 
             // http://wikiwiki.jp/kancolle/?%C6%EE%C0%BE%BD%F4%C5%E7%B3%A4%B0%E8#search-calc
             // > 参考ですが2-5式(秋)を水偵の補正2ではなく艦娘の√後素索敵を基準にする為、全ての係数を1.6841056で割って小数第2位で四捨五入した結果です。
 
-            var itemScore = fleet.Ships
+            var itemScore = ships
                             .SelectMany(x => x.EquippedSlots)
                             .Select(x => x.Item.Info)
                             .GroupBy(
@@ -43,7 +43,7 @@ namespace Gizeta.KCV.ViewRangeCalc
                                 (type, scores) => new { type, score = scores.Sum() })
                             .Aggregate(.0, (score, item) => score + GetScore(item.type, item.score));
 
-            var shipScore = fleet.Ships
+            var shipScore = ships
                             .Select(x => x.ViewRange - x.EquippedSlots.Sum(s => s.Item.Info.GetRawData().api_saku))
                             .Select(x => Math.Sqrt(x))
                             .Sum();

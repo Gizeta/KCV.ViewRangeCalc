@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FiddlerCore4">
-      <HintPath>Libraries\FiddlerCore4.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="KanColleViewer">
       <HintPath>Libraries\KanColleViewer.exe</HintPath>
       <Private>False</Private>
@@ -49,21 +45,12 @@
     </Reference>
     <Reference Include="MetroRadiance">
       <HintPath>Libraries\MetroRadiance.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MetroRadiance.Core">
-      <HintPath>Libraries\MetroRadiance.Core.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Reactive.Core">
-      <HintPath>Libraries\System.Reactive.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
